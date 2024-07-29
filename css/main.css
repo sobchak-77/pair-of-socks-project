@@ -1,0 +1,182 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+@font-face {
+  font-family: "CatComic";
+  src: url("../fonts/CatComic.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}
+
+:root {
+  --text-color: whitesmoke;
+}
+
+.page {
+  height: 100%;
+  font-family: "CatComic", sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+.page__body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100%;
+  color: var(--text-color);
+  font-size: 16px;
+  background-color: #562c00;
+}
+
+.container {
+  max-width: 1116px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* --- STYLES FOR HIDE ANYTHING --- */
+
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  clip: rect(0 0 0 0);
+}
+
+.hide {
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* ---------------------------- */
+/* --- GAME CARD CONTAINER --- */
+/* -------------------------- */
+
+.header-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-top: 30px;
+}
+
+.game {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.game__desk {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 20px;
+}
+
+.main-title {
+  margin: 0;
+  font-size: 64px;
+}
+
+.re-btn {
+  padding: 20px 24px 20px 30px;
+  color: #b2a08c;
+  font-size: 30px;
+  line-height: 102%;
+  background-color: #664119;
+  border: 2px solid #b2a08c;
+  border-radius: 8px;
+  letter-spacing: 7px;
+  text-transform: uppercase;
+  outline: none;
+  cursor: pointer;
+  transition: transform 0.6s linear,
+    background-color 0.3s linear;
+}
+
+.re-btn:focus-visible {
+  background-color: #80490f;
+}
+
+@media (any-hover: hover) {
+  .re-btn:hover {
+    background-color: #80490f;
+  }
+}
+
+.re-btn:active {
+  transform: scale(0.9);
+}
+
+
+.win-txt {
+  padding-top: 40px;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+}
+
+/* ------------------ */
+/* --- GAME CARD --- */
+/* ---------------- */
+
+.card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  font-size: 0;
+  color: transparent;
+  background-color: #664119;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  transform: perspective(300px) rotateY(180deg);
+  transition: transform 0.3s ease,
+    background-image 2s ease,
+    background-color 0.3s ease-in-out;
+}
+
+@media (any-hover: hover) {
+  .card:hover {
+    background-color: #80490f;
+  }
+}
+
+/* --- card flipped --- */
+
+.flip {
+  background-color: #d7ca25;
+  cursor: auto;
+  transform-origin: 50% 100%;
+  transform: perspective(300px) rotateY(0deg);
+}
+
+.card.flip:hover {
+  background-color: #d7ca25;
+}
+
+/* --- card matched --- */
+
+.match {
+  background-color: green;
+}
+
+.card.match:hover {
+  background-color: green;
+}

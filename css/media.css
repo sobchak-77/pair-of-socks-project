@@ -1,0 +1,29 @@
+@media (max-width: 1024px) {
+  .game__desk {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 577px) {
+  .header-wrap {
+    flex-direction: column;
+  }
+
+  .main-title {
+    margin-bottom: 20px;
+  }
+
+  .re-btn {
+    padding: 15px 13px 15px 20px;
+    font-size: 25px;
+  }
+
+  .game__desk {
+    gap: 10px;
+  }
+
+  .card {
+    width: 60px;
+    height: 60px;
+  }
+}
