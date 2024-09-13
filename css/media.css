@@ -1,21 +1,45 @@
-@media (max-width: 1024px) {
-  .game__desk {
-    grid-template-columns: repeat(4, 1fr);
+@media (max-width: 930px) {
+  .header-wrap {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "title button"
+      "timer .";
+    gap: 35px;
+    margin-bottom: 60px;
   }
 }
 
 @media (max-width: 577px) {
   .header-wrap {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "button"
+      "timer";
+    justify-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
   }
 
   .main-title {
-    margin-bottom: 20px;
+    font-size: 54px;
+  }
+
+  .stopwatch {
+    flex-direction: column;
+  }
+
+  .btn-wrap {
+    justify-self: center;
   }
 
   .re-btn {
     padding: 15px 13px 15px 20px;
     font-size: 25px;
+  }
+
+  .game {
+    font-size: 33px;
   }
 
   .game__desk {
@@ -25,5 +49,9 @@
   .card {
     width: 60px;
     height: 60px;
+  }
+
+  .hello-txt {
+    font-size: 39px;
   }
 }

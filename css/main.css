@@ -38,59 +38,58 @@ html {
 .container {
   max-width: 1116px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 30px;
 }
 
+/* --------------------------------- */
 /* --- STYLES FOR HIDE ANYTHING --- */
-
-.visually-hidden {
-  position: absolute;
-  overflow: hidden;
-  margin: -1px;
-  border: 0;
-  padding: 0;
-  width: 1px;
-  height: 1px;
-  clip: rect(0 0 0 0);
-}
+/* ------------------------------- */
 
 .hide {
-  visibility: hidden;
-  opacity: 0;
+  display: none;
 }
 
-/* ---------------------------- */
-/* --- GAME CARD CONTAINER --- */
-/* -------------------------- */
+/* ----------------------- */
+/* --- GAME CONTAINER --- */
+/* --------------------- */
 
 .header-wrap {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr) auto;
+  grid-template-areas:
+    "title timer button";
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 110px;
   padding-top: 30px;
 }
 
-.game {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* --- hello text --- */
+
+.hello-txt {
+  margin: 0;
   padding-bottom: 20px;
+  font-size: 56px;
+  text-align: center;
 }
 
-.game__desk {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 20px;
-}
+/* --- main game title --- */
 
 .main-title {
+  grid-area: title;
   margin: 0;
   font-size: 64px;
 }
 
+/* --- start / re-start button --- */
+
+.btn-wrap {
+  grid-area: button;
+  justify-self: end;
+}
+
 .re-btn {
-  padding: 20px 24px 20px 30px;
+  padding: 20px 24px 15px 30px;
   color: #b2a08c;
   font-size: 30px;
   line-height: 102%;
@@ -101,7 +100,7 @@ html {
   text-transform: uppercase;
   outline: none;
   cursor: pointer;
-  transition: transform 0.6s linear,
+  transition: transform 0.9s linear,
     background-color 0.3s linear;
 }
 
@@ -119,11 +118,28 @@ html {
   transform: scale(0.9);
 }
 
+/* --- game desk --- */
 
-.win-txt {
-  padding-top: 40px;
-  font-size: 20px;
+.game {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 40px;
+  padding-bottom: 30px;
+  font-size: 56px;
   font-weight: 400;
+}
+
+.game__desk {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 940px;
+  gap: 20px;
+}
+
+.game__end-txt {
   text-align: center;
 }
 
@@ -179,4 +195,29 @@ html {
 
 .card.match:hover {
   background-color: green;
+}
+
+/* ------------------ */
+/* --- STOPWATCH --- */
+/* ---------------- */
+
+.stopwatch {
+  grid-area: timer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stopwatch__title {
+  margin: 0;
+  font-size: 39px;
+}
+
+.stopwatch__wrap {
+  display: flex;
+  gap: 10px;
+}
+
+.stopwatch__block {
+  font-size: 35px;
 }

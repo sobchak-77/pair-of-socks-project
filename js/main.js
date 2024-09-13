@@ -1,6 +1,6 @@
-// ===================
-//  SERVICE FUNCTIONS
-// ===================
+// -------------------------
+// --- SERVICE FUNCTIONS ---
+// -------------------------
 
 // --- get a div element ---
 function createBox(className) {
@@ -10,7 +10,7 @@ function createBox(className) {
   return div;
 };
 
-// --- get a button ---
+// --- get a button element ---
 function createBtn(className, txt) {
   const btn = document.createElement('button');
   btn.classList.add(className);
@@ -28,22 +28,109 @@ function createSpan(className, txt) {
   return span;
 };
 
-// ==============
-//  THE GAME END
-// ==============
+// -------------------------
+// --- STOPWATCH SECTION ---
+// -------------------------
+
+// --- define HTML elements --- 
+const stopwatch = document.querySelector('.stopwatch');
+const secondEl = document.getElementById('second');
+const millisecEl = document.getElementById('millisec');
+
+// --- special variables ---
+let second = 0,
+  millisec = 0,
+  interval = null,
+  counter = 0;
+
+// --- start the stopwatch ---
+function startTimer() {
+  millisec++;
+  
+  // --- change millisecs ---
+
+  if (millisec < 9) {
+    millisecEl.textContent = '0' + millisec;
+  } else if (millisec > 9) {
+    millisecEl.textContent = millisec;
+  };
+
+  if (millisec > 99) {
+    second++;
+    secondEl.textContent = '0' + second;
+    millisec = 0;
+    millisecEl.textContent = '0' + millisec;
+  };
+
+  // --- change seconds ---
+  
+  if (second < 9) {
+    second.textContent = '0' + second;
+  } else if (second > 9) {
+    secondEl.textContent = second;
+  };
+
+  // --- time is over ---
+
+  if (second === 60) {
+    clearInterval(interval);
+    showLoseTxt();
+  };
+};
+
+// --- reset all stopwatch values ---
+function resetTimer() {
+  // variable values
+  second = 0;
+  millisec = 0;
+
+  // timer values
+  secondEl.textContent = '00';
+  millisecEl.textContent = '00';
+};
+
+// --- show the current score ---
+function showScoreTxt() {
+  const score = createBox('score');
+  score.textContent = `You did it in ${second} : ${millisec}`;
+
+  resetTimer();
+  gameContainer.append(score);
+};
+
+// --------------------
+// --- THE GAME END ---
+// --------------------
+
+function showLoseTxt() {
+  gameContainer.innerHTML = '';
+
+  const loseTxt = createBox('game__end-txt');
+  loseTxt.textContent = 'Oops, game over... Try again!';
+
+  gameContainer.append(loseTxt);
+};
 
 function showWinTxt() {
-  const winTxt = createBox('win-txt');
-  winTxt.textContent = `All pairs found. Good job. Let's try again!`;
   gameContainer.innerHTML = '';
+  showScoreTxt();
+
+  const winTxt = createBox('game__end-txt');
+  winTxt.textContent = `All pairs found. Good job. Let's try again!`;
+  
   gameContainer.append(winTxt);
 };
 
-// ===========
-//  GAME DESK
-// ===========
+// -------------------------
+// --- GAME DESK SECTION ---
+// -------------------------
 
+// ---define HTML elements ---
 const gameContainer = document.getElementById('game');
+const restartBtn = document.getElementById('re-btn');
+const helloTxt = document.getElementById('hello-txt');
+
+// --- specials variables ---
 let card_1 = null;
 let card_2 = null;
 
@@ -71,6 +158,10 @@ function shuffleArr(arr) {
 // --- flip the card ---
 function flipCard(card, faceValue, faceCount) {
   card.addEventListener('click', () => {
+    // start stopwatch
+    clearInterval(interval);
+    interval = setInterval(startTimer, 10);
+
     // can't press on one card twice
     if (card.classList.contains('flip') || card.classList.contains('match')) {
       return;
@@ -130,6 +221,9 @@ function flipCard(card, faceValue, faceCount) {
     // all cards opened and matched
     let matchArr = document.querySelectorAll('.match');
     if (faceCount === matchArr.length) {
+      // stop the stopwatch
+      clearInterval(interval);
+      // show score
       setTimeout(showWinTxt, 400);
     };
   });
@@ -139,7 +233,6 @@ function flipCard(card, faceValue, faceCount) {
 function getCard(face, faceCount) {
   const card = createBox('card');
   card.textContent = face;
-  // card.style.backgroundImage = `url(img/sock_${face}.svg)`;
   flipCard(card, face, faceCount);
 
   return card;
@@ -151,17 +244,22 @@ function startGame() {
   const cardFaceArr = shuffleArr( createNumArr(8) );
   const faceCount = cardFaceArr.length;
   
-  // --- give the value to every card ---
+  // give the value to every card
   cardFaceArr.forEach((face) => {
     gameDesk.append( getCard(face, faceCount) );
   });
 
+  // reset stopwatch values
+  resetTimer();
+
   gameContainer.append(gameDesk);
 };
 
-// --- button to clean desk game and start new game ---
-const restartBtn = document.getElementById('re-btn');
+// --- clean desk game, stopwatch and start new game ---
 restartBtn.addEventListener('click', () => {
+  clearInterval(interval);
+  helloTxt.classList.add('hide');
+  resetTimer();
   gameContainer.innerHTML = '';
   startGame();
 });

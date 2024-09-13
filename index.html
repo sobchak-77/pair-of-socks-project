@@ -13,9 +13,37 @@
   <section class="main">
     <div class="container">
       <div class="header-wrap">
-        <h1 class="main-title">Find a pair</h1>
-        <button class="re-btn" id="re-btn">start</button>
+        <!-- main game title -->
+        <h1 class="main-title">
+          Find a pair
+        </h1>
+        <!-- game stopwatch -->
+        <div class="stopwatch">
+          <h2 class="stopwatch__title">
+            Your time
+          </h2>
+          <div class="stopwatch__wrap">
+            <div class="stopwatch__block">
+              <div class="stopwatch__time" id="second">00</div>
+            </div>
+            <div class="stopwatch__block stopwatch__block--colon">
+              :
+            </div>
+            <div class="stopwatch__block">
+              <div class="stopwatch__time" id="millisec">00</div>
+            </div>
+          </div>
+        </div>
+        <!-- start / re-start button -->
+        <div class="btn-wrap">
+          <button class="re-btn" id="re-btn">start</button>
+        </div>
       </div>
+      <!-- hello text -->
+      <p class="hello-txt" id="hello-txt">
+        Press START to dive into the exciting world of sock hunting
+      </p>
+      <!-- game desk -->
       <div class="game" id="game"></div>
     </div>
   </section>
